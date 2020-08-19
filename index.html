@@ -1,117 +1,123 @@
 <!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>TIIDELAB Signup Form</title>
-<style>
-
-
-input{
-  width:81%;
-  padding:10px;
-  margin: 5px 20px;
-  border-radius: 13px;
-}
-.submit{
-  background-color: slateblue;
-  width:85%;
-  color:snow;
-  font-size: 20px;
-}
-input:focus{
-  background-color: salmon; 
-  color: seashell;
-outline:none;
-}
-h3{
-  color: slateblue;
-  margin:15px;
-  font-size: 30px;
-}
- .form-container,   .instruction{
-    float: left;
-    width: 50%;
-
-  }
-  @media screen and (max-width:800px){
-    .form-container, .instruction{
-      width: 100%;
-    }
-  }
-
-</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TIIDELAB Signup Form</title>
+    <style>
+        input {
+            width: 81%;
+            padding: 10px;
+            margin: 5px 20px;
+            border-radius: 13px;
+        }
+        
+        .submit {
+            background-color: slateblue;
+            width: 85%;
+            color: snow;
+            font-size: 20px;
+        }
+        
+        input:focus {
+            background-color: salmon;
+            color: seashell;
+            outline: none;
+        }
+        
+        h3 {
+            color: slateblue;
+            margin: 15px;
+            font-size: 30px;
+        }
+        
+        .form-container,
+        .instruction {
+            float: left;
+            width: 50%;
+        }
+        
+        @media screen and (max-width:800px) {
+            .form-container,
+            .instruction {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-<body>
-  <body style= "background-color: mediumpurple;">
 
-     <div style= "background-color: mistyrose; padding:5px;
+<body>
+
+    <body style="background-color: mediumpurple;">
+
+        <div style="background-color: mistyrose; padding:5px;
       border-radius:10px;
      height:60%; width:70%;
       margin:100px auto; ">
 
-    <div class= "instruction">
-      <img src="learning.png" alt="learning" srcset="" style="max-width:100%; ">
-    </div>
+            <div class="instruction">
+                <img src="learning.png" alt="learning" srcset="" style="max-width:100%; ">
+            </div>
 
-    <div style= "background-color:aquamarine"; class="form-container">
+            <div style="background-color:aquamarine" ; class="form-container">
 
-  <h3> Registration Form</h3>
+                <h3> Registration Form</h3>
 
-  <form action =""  name="SignupForm" id="SignupForm" onsubmit="processForm()">
-      <input type="text" name="FullName" placeholder= "Enter Your Full Name"  required id="fullName" >
-      <input type="email" name="email" placeholder="Enter Email Address"  required id="email">
-      <input type="text" name="userName" placeholder="Enter Your Username"  required id="userName">
-      <input type="password" name="password" placeholder="Enter Your Password"  required id="password">
-      <input type="password" name="cpassword" placeholder="Enter Your Password Again"  required id="confirmPassword">
-      <input type="submit" class ="submit" value="Signup" class="submit">
+                <form action="" name="SignupForm" id="SignupForm" data-netlify="true" method="POST" onsubmit="processForm()">
+                    <input type="text" name="FullName" placeholder="Enter Your Full Name" required id="fullName">
+                    <input type="email" name="email" placeholder="Enter Email Address" required id="email">
+                    <input type="text" name="userName" placeholder="Enter Your Username" required id="userName">
+                    <input type="password" name="password" placeholder="Enter Your Password" required id="password">
+                    <input type="password" name="cpassword" placeholder="Enter Your Password Again" required id="confirmPassword">
+                    <input type="submit" class="submit" value="Signup" class="submit">
 
-    </form>
-  </div>
-  <div style= "clear: left;"></div>
-  </div>
-  <script>
-document.getElementById('SignupForm').addEventListener("submit", function(event){
-    event.preventDefault();
-  })
-  function processForm()
-  {
-    var fullName = document.getElementById('fullName').value
-    email = document.getElementById('email').value
-    username = document.getElementById('userName').value
-    password = document.getElementById('password').value
-    cpassword= document.getElementById('confirmPassword').value
+                </form>
+            </div>
+            <div style="clear: left;"></div>
+        </div>
+        <script>
+            document.getElementById('SignupForm').addEventListener("submit", function(event) {
+                event.preventDefault();
+            })
 
-    if(password!=cpassword){
-      alert('password mismatch')
-    }
-    else{
-      var data = {
-        "fullName": fullName,
-        "email":email,
-        "userName":username,
-        "newpassword":password,
-        "isEnabled":true,
-        "roles":["user"]
-      }
+            function processForm() {
+                var fullName = document.getElementById('fullName').value
+                email = document.getElementById('email').value
+                username = document.getElementById('userName').value
+                password = document.getElementById('password').value
+                cpassword = document.getElementById('confirmPassword').value
 
-        fetch('https://api.openclass.ng/Register',{
-        method:'POST',
-        body:JSON.stringify(data),
-        headers:{
-          'Content-Type':'application/json'
-        }
+                if (password != cpassword) {
+                    alert('password mismatch')
+                } else {
+                    var data = {
+                        "fullName": fullName,
+                        "email": email,
+                        "userName": username,
+                        "newpassword": password,
+                        "isEnabled": true,
+                        "roles": ["user"]
+                    }
 
-      }).then(function(data){
-        alert('Congrats')
+                    fetch('https://api.openclass.ng/Register', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
 
-      })
+                    }).then(function(data) {
+                        alert('Congrats')
 
-       }
+                    })
 
-   }
-  </script>
+                }
 
-</body>
+            }
+        </script>
+
+    </body>
+
 </html>
